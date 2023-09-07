@@ -1,0 +1,21 @@
+/* Editor Css */
+
+.JSXText {
+  color: white;
+}
+
+.JSXIdentifier {
+  color: goldenrod;
+}
+
+.JSXClosingFragment {
+  color: #ff8c00;
+}
+
+.JSXSpreadChild {
+  color: #ff8c00;
+}
+
+.JSXBracket {
+  color: rgb(173, 166, 166);
+}
