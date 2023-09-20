@@ -1,16 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import useRouter from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const onLogin = () => {};
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const onLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/users/login", user);
+      router.push("/");
+    } catch (error: any) {
+      return error.message;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
   return (
     <div className="p-10 m-10 flex flex-row justify-center bg-white min-h-full ">
       <div className="w-1/2 bg-stone-800">Hi</div>
