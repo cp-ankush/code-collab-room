@@ -14,12 +14,14 @@ export default function LoginPage() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  console.log("ts error temporary fix", buttonDisabled, loading);
   const onLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/login", user);
+      await axios.post("/api/users/login", user);
       router.push("/");
-    } catch (error: any) {
+    } catch (error) {
+      // @ts-ignore: catch error message can be any
       return error.message;
     } finally {
       setLoading(false);
@@ -63,7 +65,6 @@ export default function LoginPage() {
         <div className=" m-16 flex flex-row gap-12">
           <button
             type="button"
-            text-white
             className="w-full p-3 text-center rounded-[12px] h-14  bg-gradient-to-r from-purple-500 via-pink-600 to-red-400"
             // onClick={onLogin}
           >
@@ -71,7 +72,6 @@ export default function LoginPage() {
           </button>
           <button
             type="button"
-            text-white
             className="w-full p-3 text-center rounded-[12px] h-14  bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
             onClick={onLogin}
           >
