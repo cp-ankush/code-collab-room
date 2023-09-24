@@ -1,7 +1,7 @@
-"use client";
 import React from "react";
-import MonacoEditor from "@monaco-editor/react";
+import Editor from "components/editors";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import type { SpecificEditorPropsT } from "components/types.d";
 
 type MonacoT = typeof monaco;
 type EditorT = monaco.editor.IStandaloneCodeEditor;
@@ -39,8 +39,7 @@ const activateMonacoJSXHighlighter = async (
   };
 };
 
-function CodeEditor() {
-  const [value, setValue] = React.useState<string | undefined>("");
+function CodeEditorReact({ code, setCode }: SpecificEditorPropsT) {
   // We need to listen to the editor onMount event
   // to setup the JSX syntax highlighting
   const handleEditorDidMount = React.useCallback(
@@ -51,18 +50,13 @@ function CodeEditor() {
   );
 
   return (
-    <MonacoEditor
-      height="80vh"
-      width="100%"
-      value={value}
-      theme="vs-dark"
+    <Editor
+      code={code}
       defaultLanguage="javascript"
-      onMount={handleEditorDidMount}
-      onChange={(val: string | undefined) => {
-        setValue(val);
-      }}
+      handleEditorDidMount={handleEditorDidMount}
+      setCode={setCode}
     />
   );
 }
 
-export default CodeEditor;
+export default CodeEditorReact;
