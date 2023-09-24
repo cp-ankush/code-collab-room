@@ -37,7 +37,8 @@ export async function POST(request: NextRequest) {
       success: true,
       savedUser,
     });
-  } catch (error: any) {
+  } catch (error) {
+    // @ts-ignore: catch error message can be any
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

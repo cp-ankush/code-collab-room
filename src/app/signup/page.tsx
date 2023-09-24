@@ -18,9 +18,10 @@ export default function SignupPage() {
   const onSignup = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/signup", user);
+      await axios.post("/api/users/signup", user);
       router.push("/login");
-    } catch (error: any) {
+    } catch (error) {
+      // @ts-ignore: catch error message can be any
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -77,7 +78,6 @@ export default function SignupPage() {
         <div className=" m-16 flex flex-row gap-12">
           <button
             type="button"
-            text-white
             className="w-full p-3 text-center rounded-[12px] h-14  bg-gradient-to-r from-purple-500 via-pink-600 to-red-400"
             onClick={onSignup}
           >
@@ -85,7 +85,6 @@ export default function SignupPage() {
           </button>
           <button
             type="button"
-            text-white
             className="w-full p-3 text-center rounded-[12px] h-14  bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
           >
             Login
