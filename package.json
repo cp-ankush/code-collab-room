@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@babel/parser": "^7.22.15",
+    "@babel/standalone": "^7.22.17",
     "@babel/traverse": "^7.22.15",
     "@monaco-editor/react": "^4.5.2",
     "@types/node": "20.5.9",

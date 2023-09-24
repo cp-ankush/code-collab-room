@@ -16,12 +16,37 @@
   }
 }
 
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
+  height: 100vh;
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.rotate-container {
+  perspective: 1000px; /* Adjust the perspective value for desired 3D effect */
+  animation: rotate 3s cubic-bezier(0.42, 0, 0.58, 1) infinite; /* Adjust the animation duration as needed */
+}
+
+.rotating-image {
+  object-fit: cover;
+  transform-style: preserve-3d;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
