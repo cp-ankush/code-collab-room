@@ -1,10 +1,9 @@
-import React, { useEffect, MutableRefObject, RefObject } from "react";
+import { useEffect, MutableRefObject, RefObject } from "react";
 
 type UseResizeEventsPropsT = {
   dividerRef: RefObject<HTMLSpanElement>;
   editorRef: MutableRefObject<HTMLDivElement | undefined>;
   previewRef: MutableRefObject<HTMLIFrameElement | undefined>;
-  isResizing: boolean;
   isResized: boolean;
   setIsResized: (arg: boolean) => void;
   iframeDocument: HTMLElement | null;
@@ -14,11 +13,11 @@ export const useResizeEvents = ({
   dividerRef,
   editorRef,
   previewRef,
-  isResizing,
   isResized,
   setIsResized,
   iframeDocument,
 }: UseResizeEventsPropsT) => {
+  let isResizing = false;
   useEffect(() => {
     const divider = dividerRef.current;
     const editor = editorRef.current;

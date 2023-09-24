@@ -29,25 +29,29 @@ export const useReactExecution = ({
   reactCode,
 }: UseReactExecutionPropsT) => {
   useEffect(() => {
-    if (iframeDocument) {
-      const Babel = require("@babel/standalone");
-      try {
-        const reactTranspiledCode = Babel.transform(reactCode, {
-          presets: ["react"],
-        }).code;
+    async function executeReactCode() {
+      if (iframeDocument) {
+        const Babel = await import("@babel/standalone");
+        try {
+          const reactTranspiledCode = Babel.transform(reactCode, {
+            presets: ["react"],
+          }).code;
 
-        const reactExecutableCode = new Function(
-          "React",
-          "ReactDOM",
-          "document",
-          reactTranspiledCode
-        );
+          const reactExecutableCode = new Function(
+            "React",
+            "ReactDOM",
+            "document",
+            reactTranspiledCode
+          );
 
-        reactExecutableCode(React, ReactDOM, iframeDocument);
-      } catch (error) {
-        console.log("error message", error);
+          reactExecutableCode(React, ReactDOM, iframeDocument);
+        } catch (error) {
+          console.log("error message", error);
+        }
       }
     }
+
+    executeReactCode();
   }, [reactCode, iframeDocument]);
 };
 

@@ -17,13 +17,11 @@ export default function ColResizer({
   iframeDocument,
 }: PropsT) {
   const dividerRef = useRef() as RefObject<HTMLSpanElement>;
-  let isResizing = false;
 
   useResizeEvents({
     dividerRef,
     editorRef,
     previewRef,
-    isResizing,
     isResized,
     setIsResized,
     iframeDocument,

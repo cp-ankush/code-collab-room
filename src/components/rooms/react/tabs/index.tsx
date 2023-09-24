@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { tabHeight } from "components/constants/tab";
 import { CodeFileT } from "components/types.d";
 
