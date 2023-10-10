@@ -2,7 +2,6 @@ import { connect } from "dbConfig/dbConfig";
 import User from "models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 connect();
 
@@ -20,30 +19,23 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    // check if user is verified
+    // if (user.isVerified !== true) {
+    //   return NextResponse.json({ error: "user not verified" }, { status: 400 });
+    // }
     //check if password correct
     const validPassword = await bcryptjs.compare(password, user.password);
 
     if (!validPassword) {
       return NextResponse.json({ error: "Invalid Password!" }, { status: 400 });
     }
-    //create token data
-    const tokenData = {
-      id: user._id,
-      username: user.username,
-      email: user.email,
-    };
-
-    //Create token
-    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
-      expiresIn: "1d",
-    });
 
     const response = NextResponse.json({
       message: "Login Successful",
       success: true,
       status: 200,
     });
-    response.cookies.set("token", token, { httpOnly: true });
+
     return response;
   } catch (error) {
     // @ts-ignore: catch error message can be any
