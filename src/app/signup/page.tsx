@@ -70,22 +70,6 @@ export default function SignupPage() {
         }}
         validationSchema={validationSchema}
         onSubmit={onSignup}
-        // onSubmit={async (values, { setSubmitting }) => {
-        //   try {
-        //     setSubmitting(true);
-        //     setLoading(true);
-        //     const response = await axios.post("/api/users/signup", values);
-
-        //     response.status == 200 && toast.success(response?.data?.message);
-        //     router.push("/login");
-        //   } catch (error) {
-        //     // @ts-ignore: catch error message can be any
-        //     toast.error(error?.response?.data?.error);
-        //   } finally {
-        //     setLoading(false);
-        //     setSubmitting(false);
-        //   }
-        // }}
       >
         {({ isSubmitting, setFieldValue }) => (
           <Form>
